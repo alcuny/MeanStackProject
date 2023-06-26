@@ -39,11 +39,12 @@ router.post('/authenticate', (req, res, next) => {
 
   User.getUserByUsername(username, (err, user) => {
       if (err) throw err;
+      console.log(user);
       if (!user) {
           return res.json({ success: false, msg: 'user not found' });
       }
       User.comparePassword(password, user.password, (err, isMatch) => {
-          console.log('test');
+          console.log(isMatch);
           if (err) throw err;
           if (isMatch) {
             console.log('test', config1.secret);
@@ -64,6 +65,7 @@ router.post('/authenticate', (req, res, next) => {
               })
           }
           else {
+              console.log("test112");
               return res.json({ succes: false, msg: 'wrong password' });
           }
       })
