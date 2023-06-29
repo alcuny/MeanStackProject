@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt'; 
 
 interface User {
   name?: string;
@@ -74,6 +75,12 @@ export class AuthService {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
+
+  loggedIn(){
+    this.loadToken();
+    const helper = new JwtHelperService();
+    return !helper.isTokenExpired(this.authToken); //False if Token is good, True if not good
+}
 
   logout(){
     this.authToken = null;

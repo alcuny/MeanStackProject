@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr'; // Add this import statement
 })
 export class NavbarComponent {
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     private toastr: ToastrService
     ) {}
